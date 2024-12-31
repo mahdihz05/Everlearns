@@ -3,7 +3,7 @@
 **EverLearns** is an innovative educational web application designed to enhance English learning experiences for Persian speakers using cutting-edge **artificial intelligence**. It automatically generates **English subtitles** and provides **real-time translations to Persian**, ensuring accurate and fluid translations tailored for professional courses.
 
 ![home_page](images/home_page.png)
-
+### everlearns.ir
 ---
 
 ## Why EverLearns?
@@ -29,8 +29,8 @@ Traditional educational platforms for Persian speakers often lack reliable suppo
 ### 1. Intelligent Subtitle Generation
 - Converts course videos into **precise English subtitles**.
 - Provides **fluid and contextual Persian translations** automatically.
-- ![english_subtitle](images/english_translate.png)
-- ![persian_subtitle](images/persian_translate.png)
+- ![english_subtitle](images/english_subtitle.png)
+- ![persian_subtitle](images/persian_subtitle.png)
 
 ### 2. Personalized AI Tutor
 - The AI chatbot is trained specifically for each course when it’s first accessed.
@@ -45,7 +45,7 @@ Traditional educational platforms for Persian speakers often lack reliable suppo
 - **How it works:**
   - Subtitles are generated only when a user starts a course.
   - The tutor is trained when the user interacts with it for the first time.
-- ![tranlate_subtitle](images/tranlate_subtitle.png)
+- ![tranlate_subtitle](images/translate_subtitle.png)
 - ![load_chat](images/load_chat.png)
 
 ### 4. Addressing Key Problems
