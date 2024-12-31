@@ -2,6 +2,8 @@
 
 **EverLearns** is an innovative educational web application designed to enhance English learning experiences for Persian speakers using cutting-edge **artificial intelligence**. It automatically generates **English subtitles** and provides **real-time translations to Persian**, ensuring accurate and fluid translations tailored for professional courses.
 
+![home_page](images/home_page.png)
+
 ---
 
 ## Why EverLearns?
@@ -27,7 +29,8 @@ Traditional educational platforms for Persian speakers often lack reliable suppo
 ### 1. Intelligent Subtitle Generation
 - Converts course videos into **precise English subtitles**.
 - Provides **fluid and contextual Persian translations** automatically.
-- ✨ **Recommended Visual:** Add a GIF showcasing a video being processed and subtitles appearing in both English and Persian.
+- ![english_subtitle](images/english_translate.png)
+- ![persian_subtitle](images/persian_translate.png)
 
 ### 2. Personalized AI Tutor
 - The AI chatbot is trained specifically for each course when it’s first accessed.
@@ -35,14 +38,15 @@ Traditional educational platforms for Persian speakers often lack reliable suppo
   - Ask detailed questions.
   - Get summaries of lessons.
   - Solve complex problems with interactive discussions.
-- ✨ **Recommended Visual:** Add screenshots of a chatbot answering a course-related question and providing a lesson summary.
+- - ![chat_screen](images/chat_screen.png)
 
 ### 3. On-Demand Subtitle & Tutor Training
 - Subtitles and AI tutors are created **on-demand** to reduce infrastructure costs.
 - **How it works:**
   - Subtitles are generated only when a user starts a course.
   - The tutor is trained when the user interacts with it for the first time.
-- ✨ **Recommended Visual:** Use a flow diagram showing the "on-demand generation" process.
+- ![tranlate_subtitle](images/tranlate_subtitle.png)
+- ![load_chat](images/load_chat.png)
 
 ### 4. Addressing Key Problems
 - **Subtitle Quality**: Overcomes the limitations of traditional translation systems.
