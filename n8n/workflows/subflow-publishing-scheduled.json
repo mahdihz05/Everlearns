@@ -1,0 +1,232 @@
+{
+  "name": "subflow-publishing-scheduled",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.payload.channel }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "name": "Validate Channel",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        450,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.callbackUrl || $env.DJANGO_HOST + '/api/v1/n8n/callback/' }}",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "correlationId",
+              "value": "={{ $('Start').first().json.body.correlationId }}"
+            },
+            {
+              "name": "status",
+              "value": "processing"
+            },
+            {
+              "name": "result",
+              "value": "={{ { 'message': 'Scheduled publishing validated and queued for execution' } }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Update Status: Queued",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "amount": "={{ $json.body.payload.delayHours || 1 }}",
+        "unit": "hours"
+      },
+      "name": "Wait (Simulated Schedule)",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1,
+      "position": [
+        850,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": "subflow-publishing-immediate"
+      },
+      "name": "Execute Immediate Publish",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1,
+      "position": [
+        1050,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.body.callbackUrl || $env.DJANGO_HOST + '/api/v1/n8n/callback/' }}",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "correlationId",
+              "value": "={{ $('Start').first().json.body.correlationId }}"
+            },
+            {
+              "name": "status",
+              "value": "failed"
+            },
+            {
+              "name": "errorDetails",
+              "value": "Invalid or missing channel"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Callback Error: Invalid Channel",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        650,
+        400
+      ]
+    },
+    {
+      "parameters": {},
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        250,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('Start').first().json.body.callbackUrl || $env.DJANGO_HOST + '/api/v1/n8n/callback/' }}",
+        "method": "POST",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "correlationId",
+              "value": "={{ $('Start').first().json.body.correlationId || 'unknown' }}"
+            },
+            {
+              "name": "status",
+              "value": "failed"
+            },
+            {
+              "name": "errorDetails",
+              "value": "={{ $json.error.message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "name": "Callback Error to Django",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        450,
+        600
+      ]
+    }
+  ],
+  "connections": {
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Validate Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate Channel": {
+      "main": [
+        [
+          {
+            "node": "Update Status: Queued",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Callback Error: Invalid Channel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Status: Queued": {
+      "main": [
+        [
+          {
+            "node": "Wait (Simulated Schedule)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait (Simulated Schedule)": {
+      "main": [
+        [
+          {
+            "node": "Execute Immediate Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Callback Error to Django",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
