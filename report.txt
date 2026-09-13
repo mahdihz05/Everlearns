@@ -1,0 +1,90 @@
+STATUS: COMPLETE
+PROGRESS_ESTIMATE: 100%
+
+OBJECTIVE_COMPLETION:
+- Implemented V2 long-term Workspace Memory and RAG foundation.
+
+IMPLEMENTED:
+- memory domain model (WorkspaceMemory, MemoryCategory enum)
+- Workspace isolation guarantees enforced by all retrieval services
+- Vector/semantic storage abstract interfaces with local dummy mocks
+- RetrievalService for RAG by context and category
+- ContextAssembler to prepare memories for agent, brainstorming, content map
+- MemoryService for data upsert, supersession, deletion, reindexing
+- SimilarityService for duplicate topics/content detection and under-covered gap analysis
+- API internal service (MemoryAPI facade)
+- Django minimal tests verifying all key workflows
+
+NOT_IMPLEMENTED:
+- External real integrations (Pinecone/PGVector, OpenAI) are mocked and ready for injection via environment variables.
+
+ARCHITECTURE_CONTRACTS_FOLLOWED:
+- Created isolated workspace-scoped memory domain
+- Isolated third-party integrations (mocked out as required)
+
+DATA_MODEL_AND_MIGRATIONS:
+- Django `WorkspaceMemory` model generated and migrated.
+
+WORKSPACE_ISOLATION:
+- Strictly enforced in `MemoryService.upsert_memory` and `RetrievalService` via `workspace_id` parameters filtering databases and mocking namespaces.
+
+API_BACKEND_WORK:
+- Core Memory Service API established via facade (`memory/api.py`).
+
+FRONTEND_WORK:
+- None.
+
+EXTERNAL_DEPENDENCIES_OR_BLOCKERS:
+- Vector Storage / Embeddings providers omitted to prevent secret hardcoding. Local mock provided.
+
+BASIC_VALIDATION_PERFORMED:
+- Unit tests executed using isolated memory backend testing Django environment (`python test_settings.py`).
+
+SHARED_OR_CORE_FILES_TOUCHED:
+- None. Complete isolation inside `memory/` app directory.
+
+INTEGRATION_NOTES_FOR_OTHER_LANES:
+- Use `MemoryAPI` facade (instantiated anywhere) to push memories or retrieve assembled contexts for content logic.
+- Supply `EMBEDDING_PROVIDER` and `VECTOR_STORAGE` environment variables once implementations are built for AWS/production.
+
+MERGE_CONFLICT_RISK: LOW
+
+KNOWN_RISKS:
+- Scalability of memory storage depends heavily on the implementation of production VectorStorage.
+
+REMAINING_WORK:
+- Concrete vector integration (PGVector/etc).
+- Connecting upstream agent inputs directly.
+
+COMMITS:
+- Will be provided by submission hook.
+
+NEXT_BEST_ACTION:
+- Begin integration testing MemoryAPI across Content Map and Agent routines.
+
+MEMORY_DOMAIN_STATUS:
+- Completed, WorkspaceMemory model running.
+
+MEMORY_CATEGORIES_IMPLEMENTED:
+- writing_style, preferred_tone, post_structures, previous_topics, frequent_topics, unused_topics, user_emphasis, edit_tendencies, cta_preferences, visual_preferences, brand_rules, previous_mistakes.
+
+RAG_RETRIEVAL_STATUS:
+- Working interface `RetrievalService` established and mocked.
+
+VECTOR_STORAGE_ABSTRACTION:
+- Abstract Base Class `VectorStorage` implemented, with `LocalMockVectorStorage`.
+
+EMBEDDING_PROVIDER_ABSTRACTION:
+- Abstract Base Class `EmbeddingProvider` implemented, with `LocalMockEmbeddingProvider`.
+
+WORKSPACE_ISOLATION_GUARANTEES:
+- Guaranteed via required `workspace_id` param on all db fetches and mocked storage operations.
+
+MEMORY_UPDATE_PIPELINE:
+- Upsert, supersession, active flags, and background re-indexing services complete.
+
+SIMILARITY_DUPLICATE_SUPPORT:
+- Interface completed via `SimilarityService`.
+
+DOWNSTREAM_ADAPTERS:
+- Completed via `ContextAssembler` preparing output for Brainstorming, Intelligence, and Agent contexts.
