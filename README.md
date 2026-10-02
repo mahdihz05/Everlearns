@@ -1,114 +1,58 @@
-# EverLearns: AI-Powered Educational Platform
+# EverLearns: educational platform showcase
 
-**EverLearns** is an innovative educational web application designed to enhance English learning experiences for Persian speakers using cutting-edge **artificial intelligence**. It automatically generates **English subtitles** and provides **real-time translations to Persian**, ensuring accurate and fluid translations tailored for professional courses.
+EverLearns is a portfolio case study about an educational platform for Persian speakers studying English-language courses. This repository contains a product narrative and existing screenshots, **not application source**. It has no runnable backend/frontend, dependency manifest, tests or deployment workflow. Cloning it lets you inspect the presentation; it does not let you run or verify the product.
+
+The product site named in the original presentation is `everlearns.ir`. This README does not verify its availability or the current feature set.
 
 ![home_page](images/home_page.png)
-### everlearns.ir
----
 
-## Why EverLearns?
+## Product scope and evidence
 
-Traditional educational platforms for Persian speakers often lack reliable support for professional English courses, leaving learners with poor subtitles or none at all. **EverLearns** bridges this gap with two core innovations:
+The original presentation describes English subtitle generation, Persian subtitle translation and a course-focused chat tutor. The screenshots illustrate those interfaces. They do not establish translation accuracy, response latency, instructor-level answers or production reliability.
 
-1. **AI-Generated Subtitles & Translations**:
-   - Automatic generation of **English subtitles**.
-   - High-quality **Persian translations**, far superior to basic Google Translate results.
+The described tutor use cases include answering course questions, summarizing lessons, generating practice questions and discussing concepts. These are product claims in this case study, not capabilities reproduced by code or evaluated here. This repository contains no comparative translation benchmark, so it makes no claim of being better than Google Translate or another service.
 
-2. **AI-Powered Virtual Tutor**:
-   - Each course comes with a **custom AI chatbot** trained specifically for the course content.
-   - The chatbot can:
-     - Answer questions like an expert instructor.
-     - Summarize lessons.
-     - Generate practice questions.
-     - Engage in discussions to clarify concepts.
+### Subtitles and translation
 
----
+The described flow starts when a learner opens a course: the system prepares English subtitles and Persian translations for that course. On-demand preparation is a product design described in the original narrative; no public implementation or cost measurements are included here.
 
-## Features
+![english_subtitle](images/english_subtitle.png)
+![persian_subtitle](images/persian_subtitle.png)
 
-### 1. Intelligent Subtitle Generation
-- Converts course videos into **precise English subtitles**.
-- Provides **fluid and contextual Persian translations** automatically.
-- ![english_subtitle](images/english_subtitle.png)
-- ![persian_subtitle](images/persian_subtitle.png)
+### Course-focused tutor
 
-### 2. Personalized AI Tutor
-- The AI chatbot is trained specifically for each course when it’s first accessed.
-- Users can:
-  - Ask detailed questions.
-  - Get summaries of lessons.
-  - Solve complex problems with interactive discussions.
-- - ![chat_screen](images/chat_screen.png)
+The chat screens show a course-oriented interface and a preparation/loading state.
 
-### 3. On-Demand Subtitle & Tutor Training
-- Subtitles and AI tutors are created **on-demand** to reduce infrastructure costs.
-- **How it works:**
-  - Subtitles are generated only when a user starts a course.
-  - The tutor is trained when the user interacts with it for the first time.
-- ![tranlate_subtitle](images/translate_subtitle.png)
-- ![load_chat](images/load_chat.png)
+![chat_screen](images/chat_screen.png)
 
-### 4. Addressing Key Problems
-- **Subtitle Quality**: Overcomes the limitations of traditional translation systems.
-- **Lack of Support**: AI ensures users always have access to reliable, round-the-clock assistance.
+### On-demand preparation screens
 
----
+The original narrative describes preparing subtitles and tutor context when first requested. These screens alone do not establish when processing runs or how much it costs.
 
-## How It Works
+![tranlate_subtitle](images/translate_subtitle.png)
+![load_chat](images/load_chat.png)
 
-### Subtitle & Translation
-1. User starts a course.
-2. AI generates and stores **English subtitles**.
-3. Subtitles are translated into **Persian** in real-time.
+The earlier narrative called this preparation "training a model for each course." There is no source code, training configuration or evaluation in this repository to support that description. It also does not establish whether the product uses retrieval-augmented generation, prompts with course context, fine-tuning or another approach. Retrieving course material at answer time is different from training model weights; neither mechanism is claimed as verified here. Chat-history retention and reuse are also not demonstrated by the public files.
 
-### AI Tutor
-1. User interacts with the course's chatbot.
-2. The model is trained on the course content (only once).
-3. All interactions and improvements are stored for future sessions.
+## Reported technical background
 
----
+The original project narrative names the following technologies. They describe the reported product stack, not dependencies or architecture inspectable in this repository:
 
-## Technologies Used
+- Backend: Python, FastAPI and PostgreSQL.
+- AI integrations: OpenAI and NLP/translation pipelines; specific models and processing details are not documented here.
+- Frontend: React and Tailwind CSS.
+- Infrastructure: Docker, AWS Lambda and S3 for subtitle storage.
 
-- **Backend**:
-  - Python
-  - FastAPI
-  - PostgreSQL
-- **AI Models**:
-  - NLP and translation models (e.g., OpenAI, custom ML pipelines)
-- **Frontend**:
-  - React.js
-  - TailwindCSS
-- **Infrastructure**:
-  - Docker
-  - AWS Lambda
-  - S3 for subtitle storage
+To turn this case study into runnable technical evidence would require authorized source, setup instructions, tests and documented data/model flows. None are supplied here, and the screenshots should not be read as a substitute for them.
 
----
+## Team and contribution scope
 
-## Challenges & Solutions
+The original presentation credits **Bizix Tech** (`bizix.tech`) and describes the portfolio owner's role as backend development and AI/API work. This repository records that attribution; it does not contain application code from which to assess the implementation or individual contribution independently.
 
-### Challenge 1: High Infrastructure Costs
-- **Problem**: Running AI models for every course can become expensive with high API or local model costs.
-- **Solution**: Implement **on-demand processing**:
-  - Subtitles are generated only when the course is accessed.
-  - AI tutors are trained when users first interact with them.
+## Licensing and reuse
 
----
+Licensing is **undecided**. This repository contains no `LICENSE` file, so the previous MIT assertion has been removed. This README does not choose or grant a new license to the narrative, screenshots or any unpublished application code. Do not assume that public visibility gives permission to reuse these materials; ask the owner before reuse.
 
-## Contributing
+## Feedback
 
-We welcome contributions! Feel free to fork the repository and submit pull requests. For major changes, please open an issue first to discuss the proposed changes.
-
----
-
-## License
-
-This project is licensed under the **MIT License**. See `LICENSE` for more details.
-
----
-
-## About the Team
-
-EverLearns is developed by the **Bizix Tech** team ([bizix.tech](https://bizix.tech)).  
-**Role in Development**: Backend development and AI/API optimizations.
+Issues or documentation corrections can clarify this case study. There is no public application source here to contribute backend or frontend changes to. Existing screenshot links have been kept; this update adds no visual assets.
